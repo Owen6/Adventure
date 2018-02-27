@@ -8,6 +8,9 @@ done = False
 
 is_Color = True
 
+with open('map.txt') as f:
+	words = list(f)
+
 x=30
 y=30
 speed=5
