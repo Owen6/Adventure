@@ -1,4 +1,6 @@
 import pygame
+from tiles import *
+
 
 pygame.init()
 screen = pygame.display.set_mode((700,700))
@@ -8,12 +10,14 @@ done = False
 
 is_Color = True
 
-with open('map.txt') as f:
+"""with open('map.txt') as f:
 	tiles = list(f)
-print(tiles)
+print(tiles)"""
+tileSide = 10
 x=30
 y=30
 speed=5
+print(len(Map))
 
 KEYS = {
 	"w" : False,
@@ -21,6 +25,14 @@ KEYS = {
 	"s" : False,
 	"d" : False
 }
+
+def mapDraw():
+	global tileSide
+	for y in range(0,len(Map)):
+		for z in range(0,len(Map[y])):
+			n = Map[y][z]
+			if n == 1: 
+				pygame.draw.rect(screen,(255,234,12),(z*tileSide,y*tileSide,tileSide,tileSide))
 
 def keyswitch(key,boolv):
 	if key == pygame.K_d:
@@ -61,6 +73,7 @@ while not done:
 		color = (104,127,97)
 		bg = (255,255,255)
 	screen.fill(bg)
+	mapDraw()
 	pygame.draw.rect(screen,color,pygame.Rect(x,y,60,60))
 	movement()
 
