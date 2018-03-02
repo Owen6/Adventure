@@ -3,7 +3,7 @@ from tiles import *
 
 
 pygame.init()
-screen = pygame.display.set_mode((700,700))
+screen = pygame.display.set_mode((1920,2160))
 CLOCK = pygame.time.Clock()
 TARGET_FPS=60
 done = False
@@ -28,11 +28,14 @@ KEYS = {
 
 def mapDraw():
 	global tileSide
-	for y in range(0,len(Map)):
-		for z in range(0,len(Map[y])):
-			n = Map[y][z]
-			if n == 1: 
-				pygame.draw.rect(screen,(255,234,12),(z*tileSide,y*tileSide,tileSide,tileSide))
+	for p in range(0,12):
+		for k in range(0,6):
+			Map = order[p][k]
+			for y in range(0,len(Map)):
+				for z in range(0,len(Map[y])):
+					n = Map[y][z]
+					if n == 1: 
+						pygame.draw.rect(screen,(255,234,12),(z*tileSide,y*tileSide,tileSide,tileSide))
 
 def keyswitch(key,boolv):
 	if key == pygame.K_d:
