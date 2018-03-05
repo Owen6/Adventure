@@ -1,5 +1,7 @@
 import pygame
+import tiles
 from tiles import *
+
 
 
 pygame.init()
@@ -17,7 +19,7 @@ tileSide = 10
 x=30
 y=30
 speed=5
-print(len(Map))
+drawn = True
 
 KEYS = {
 	"w" : False,
@@ -35,7 +37,9 @@ def mapDraw():
 				for z in range(0,len(Map[y])):
 					n = Map[y][z]
 					if n == 1: 
-						pygame.draw.rect(screen,(255,234,12),(z*tileSide,y*tileSide,tileSide,tileSide))
+						pygame.draw.rect(screen,(255,234,12),((z*tileSide)+(k*320),(y*tileSide)+(p*180),tileSide,tileSide))
+		print(p)
+	drawn = False
 
 def keyswitch(key,boolv):
 	if key == pygame.K_d:
@@ -76,9 +80,12 @@ while not done:
 		color = (104,127,97)
 		bg = (255,255,255)
 	screen.fill(bg)
-	mapDraw()
+	if drawn == True:
+		mapDraw()
 	pygame.draw.rect(screen,color,pygame.Rect(x,y,60,60))
 	movement()
 
 	CLOCK.tick(TARGET_FPS)
 	pygame.display.flip()
+
+	
