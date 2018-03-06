@@ -30,6 +30,7 @@ KEYS = {
 
 def mapDraw():
 	global tileSide
+	global drawn
 	for p in range(0,12):
 		for k in range(0,6):
 			Map = order[p][k]
@@ -38,8 +39,11 @@ def mapDraw():
 					n = Map[y][z]
 					if n == 1: 
 						pygame.draw.rect(screen,(255,234,12),((z*tileSide)+(k*320),(y*tileSide)+(p*180),tileSide,tileSide))
+					elif n == 0:
+						pygame.draw.rect(screen,(178,178,178),((z*tileSide)+(k*320),(y*tileSide)+(p*180),tileSide,tileSide))
 		print(p)
-	drawn = False
+		if p == 11:
+			drawn = False
 
 def keyswitch(key,boolv):
 	if key == pygame.K_d:
@@ -54,14 +58,19 @@ def keyswitch(key,boolv):
 def movement():
 	global x
 	global y
+	global drawn
 	if KEYS['d']:
 		x += speed
+		drawn = True
 	if KEYS['a']:
 		x -= speed
+		drawn = True
 	if KEYS['s']:
 		y += speed
+		drawn = True
 	if KEYS['w']:
 		y -= speed
+		drawn = True
 
 while not done:
 	for event in pygame.event.get():
@@ -79,10 +88,11 @@ while not done:
 	else:
 		color = (104,127,97)
 		bg = (255,255,255)
-	screen.fill(bg)
+	
 	if drawn == True:
+		screen.fill(bg)
 		mapDraw()
-	pygame.draw.rect(screen,color,pygame.Rect(x,y,60,60))
+	pygame.draw.rect(screen,color,pygame.Rect(x,y,15,15))
 	movement()
 
 	CLOCK.tick(TARGET_FPS)
