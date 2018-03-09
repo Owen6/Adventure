@@ -1,13 +1,15 @@
 import pygame
+import pygame.camera
 import tiles
 from tiles import *
 
 
 
 pygame.init()
-screen = pygame.display.set_mode((1920,2160))
+pygame.camera.init()
+screen = pygame.display.set_mode((960,1080))
 CLOCK = pygame.time.Clock()
-TARGET_FPS=60
+TARGET_FPS=30
 done = False
 
 is_Color = True
@@ -15,11 +17,12 @@ is_Color = True
 """with open('map.txt') as f:
 	tiles = list(f)
 print(tiles)"""
-tileSide = 10
+tileSide = 5
 x=30
 y=30
 speed=5
 drawn = True
+black = False
 
 KEYS = {
 	"w" : False,
@@ -38,9 +41,9 @@ def mapDraw():
 				for z in range(0,len(Map[y])):
 					n = Map[y][z]
 					if n == 1: 
-						pygame.draw.rect(screen,(255,234,12),((z*tileSide)+(k*320),(y*tileSide)+(p*180),tileSide,tileSide))
+						pygame.draw.rect(screen,(255,234,12),((z*tileSide)+(k*160),(y*tileSide)+(p*90),tileSide,tileSide))
 					elif n == 0:
-						pygame.draw.rect(screen,(178,178,178),((z*tileSide)+(k*320),(y*tileSide)+(p*180),tileSide,tileSide))
+						pygame.draw.rect(screen,(178,178,178),((z*tileSide)+(k*160),(y*tileSide)+(p*90),tileSide,tileSide))
 		print(p)
 		if p == 11:
 			drawn = False
@@ -88,11 +91,12 @@ while not done:
 	else:
 		color = (104,127,97)
 		bg = (255,255,255)
-	
-	if drawn == True:
+	if black == True:
 		screen.fill(bg)
+		black = False
+	if drawn == True:		
 		mapDraw()
-	pygame.draw.rect(screen,color,pygame.Rect(x,y,15,15))
+	pygame.draw.rect(screen,color,pygame.Rect(x,y,7,7))
 	movement()
 
 	CLOCK.tick(TARGET_FPS)
