@@ -12,21 +12,7 @@ screen = pygame.display.set_mode((960,1080))
 CLOCK = pygame.time.Clock()
 TARGET_FPS=30
 done = False
-
 is_Color = True
-
-#class Capture(object):
-#	def __init__(self):
-#		self.size(960,480)
-#		self.display = pygame.display.set_mode(self.size, 0)
-#		self.clist = pygame.camera.list_cameras()
-#		if not self.clist:
-#			raise ValueError("No Cameras")
-#		self.cam = pygame.camera.Camera(self.clist[0],self.size)
-#		self.cam.start()
-#		self.snapshot = pygame.surface.Surface(self.size, 0, self.display)
-#	def get
-
 tileSide = 5
 x=30
 y=30
@@ -61,12 +47,13 @@ def mapDraw():
 
 def reDraw():
 	global tileSide
-	global roomdrawn
+	global roomdraw
 	global x
 	global y 
 	for p in range(0,12):
 		for k in range(0,6):
-			if (x>=(k*160) and x<((k+1)*160)) and (y>=(p*160) and y<((p+1)*160)):
+			if (x>=(k*160) and x<=((k+1)*160)) and (y>=(p*90) and y<=((p+1)*90)):
+				print(p,k)
 				Map = order[p][k]
 				for t in range(0,len(Map)):
 					for z in range(0,len(Map[t])):
@@ -75,8 +62,8 @@ def reDraw():
 							pygame.draw.rect(screen,(tileColor[p][k]),((z*tileSide)+(k*160),(t*tileSide)+(p*90),tileSide,tileSide))
 						elif n == 0:
 							pygame.draw.rect(screen,(grey),((z*tileSide)+(k*160),(t*tileSide)+(p*90),tileSide,tileSide))
-		if p == 11:
 			roomdraw = False
+
 
 def keyswitch(key,boolv):
 	if key == pygame.K_d:
@@ -90,8 +77,8 @@ def keyswitch(key,boolv):
 
 def movement():
 	global x
-	global y
-	global drawn
+	global y	
+	global roomdraw
 	if KEYS['d']:
 		x += speed
 		roomdraw = True
@@ -116,6 +103,7 @@ while not done:
 			keyswitch(event.key, True)
 		if event.type == pygame.KEYUP:
 			keyswitch(event.key, False)
+
 	if is_Color:
 		color = (151,128,158)
 		bg = (255,255,255)
@@ -131,8 +119,5 @@ while not done:
 		reDraw()
 	pygame.draw.rect(screen,color,pygame.Rect(x,y,7,7))
 	movement()
-
 	CLOCK.tick(TARGET_FPS)
 	pygame.display.flip()
-
-	
