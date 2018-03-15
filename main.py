@@ -20,6 +20,9 @@ speed=5
 drawn = True
 roomdraw = True
 isblack = True
+color = (151,128,158)
+bg = (245,245,245)
+
 
 KEYS = {
 	"w" : False,
@@ -27,6 +30,7 @@ KEYS = {
 	"s" : False,
 	"d" : False
 }
+
 
 def mapDraw():
 	global tileSide
@@ -41,7 +45,6 @@ def mapDraw():
 						pygame.draw.rect(screen,(tileColor[p][k]),((z*tileSide)+(k*160),(y*tileSide)+(p*90),tileSide,tileSide))
 					elif n == 0:
 						pygame.draw.rect(screen,(grey),((z*tileSide)+(k*160),(y*tileSide)+(p*90),tileSide,tileSide))
-		print(p)
 		if p == 11:
 			drawn = False
 
@@ -63,7 +66,6 @@ def reDraw():
 						elif n == 0:
 							pygame.draw.rect(screen,(grey),((z*tileSide)+(k*160),(t*tileSide)+(p*90),tileSide,tileSide))
 			roomdraw = False
-
 
 def keyswitch(key,boolv):
 	if key == pygame.K_d:
@@ -94,8 +96,7 @@ def movement():
 
 while not done:
 	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			
+		if event.type == pygame.QUIT:	
 			done = True
 		if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
 			is_Color = not is_Color
@@ -104,12 +105,6 @@ while not done:
 		if event.type == pygame.KEYUP:
 			keyswitch(event.key, False)
 
-	if is_Color:
-		color = (151,128,158)
-		bg = (255,255,255)
-	else:
-		color = (104,127,97)
-		bg = (255,255,255)
 	if isblack == True:
 		screen.fill(bg)
 		isblack = False
