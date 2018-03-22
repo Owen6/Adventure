@@ -5,15 +5,15 @@ import tiles
 from tiles import *
 
 
-
+tileSide = 4
 pygame.init()
 pygame.camera.init()
-screen = pygame.display.set_mode((960,1080))
+screen = pygame.display.set_mode(((240*tileSide),(288*tileSide)))
 CLOCK = pygame.time.Clock()
 TARGET_FPS=30
 done = False
 is_Color = True
-tileSide = 5
+
 x=30
 y=30
 speed=5
@@ -42,9 +42,9 @@ def mapDraw():
 				for z in range(0,len(Map[y])):
 					n = Map[y][z]
 					if n == 1: 
-						pygame.draw.rect(screen,(tileColor[p][k]),((z*tileSide)+(k*160),(y*tileSide)+(p*90),tileSide,tileSide))
+						pygame.draw.rect(screen,(tileColor[p][k]),((z*tileSide)+(k*(40*tileSide)),(y*tileSide)+(p*(24*tileSide)),tileSide,tileSide))
 					elif n == 0:
-						pygame.draw.rect(screen,(grey),((z*tileSide)+(k*160),(y*tileSide)+(p*90),tileSide,tileSide))
+						pygame.draw.rect(screen,(grey),((z*tileSide)+(k*(40*tileSide)),(y*tileSide)+(p*(24*tileSide)),tileSide,tileSide))
 		if p == 11:
 			drawn = False
 
@@ -55,16 +55,16 @@ def reDraw():
 	global y 
 	for p in range(0,12):
 		for k in range(0,6):
-			if (x>=(k*160) and x<=((k+1)*160)) and (y>=(p*90) and y<=((p+1)*90)):
+			if (x>=(k*(40*tileSide)) and x<=((k+1)*(40*tileSide))) and (y>=(p*(24*tileSide)) and y<=((p+1)*(24*tileSide))):
 				print(p,k)
 				Map = order[p][k]
 				for t in range(0,len(Map)):
 					for z in range(0,len(Map[t])):
 						n = Map[t][z]
 						if n == 1: 
-							pygame.draw.rect(screen,(tileColor[p][k]),((z*tileSide)+(k*160),(t*tileSide)+(p*90),tileSide,tileSide))
+							pygame.draw.rect(screen,(tileColor[p][k]),((z*tileSide)+(k*(40*tileSide)),(t*tileSide)+(p*(24*tileSide)),tileSide,tileSide))
 						elif n == 0:
-							pygame.draw.rect(screen,(grey),((z*tileSide)+(k*160),(t*tileSide)+(p*90),tileSide,tileSide))
+							pygame.draw.rect(screen,(grey),((z*tileSide)+(k*(40*tileSide)),(t*tileSide)+(p*(24*tileSide)),tileSide,tileSide))
 			roomdraw = False
 
 def keyswitch(key,boolv):
@@ -112,7 +112,7 @@ while not done:
 		mapDraw()
 	if roomdraw == True:
 		reDraw()
-	pygame.draw.rect(screen,color,pygame.Rect(x,y,7,7))
+	pygame.draw.rect(screen,color,pygame.Rect(x,y,tileSide*1.5,tileSide*1.5))
 	movement()
 	CLOCK.tick(TARGET_FPS)
 	pygame.display.flip()
