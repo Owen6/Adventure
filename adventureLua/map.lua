@@ -17,7 +17,7 @@ require "tiles"
 			drawn = False
 			]]
 
-function love.draw()
+function map_draw()
 	for i=1, 12 do 
 		for v=1, 6 do 
 			Map = order[i][v]
@@ -26,7 +26,10 @@ function love.draw()
 					n = Map[y][x]
 					if n==1 then
 						love.graphics.setColor(tileColor[i][v])
-    					love.graphics.rectangle('fill', (x*tileSide)+(v*(40*tileSide),(y*tileSide)+(i*(24*tileSide),tileSide,tileSide)
+    					love.graphics.rectangle('fill', (x*tileSide)+(v*(20*tileSide)),(y*tileSide)+(i*(12*tileSide)),tileSide,tileSide)
+					elseif n == 0 then
+						love.graphics.setColor(grey)
+						love.graphics.rectangle('fill', (x*tileSide)+(v*(20*tileSide)),(y*tileSide)+(i*(12*tileSide)),tileSide,tileSide)
 					end
 				end
 			end
