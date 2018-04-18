@@ -12,6 +12,6 @@ end
 
 function love.draw()
 	love.graphics.setBackgroundColor(235,235,235)
-	player:draw()
 	map_draw()
+	player:draw()
 end

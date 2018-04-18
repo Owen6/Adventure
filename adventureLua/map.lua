@@ -1,22 +1,5 @@
 require "tiles"
 
---[[def mapDraw():
-	global tileSide
-	global drawn
-	for p in range(0,12):
-		for k in range(0,6):
-			Map = order[p][k]
-			for y in range(0,len(Map)):
-				for x in range(0,len(Map[y])):
-					n = Map[y][x]
-					if n == 1: 
-						pygame.draw.rect(screen,(tileColor[p][k]),((x*tileSide)+(k*(40*tileSide)),(y*tileSide)+(p*(24*tileSide)),tileSide,tileSide))
-					elif n == 0:
-						pygame.draw.rect(screen,(grey),(),(y*tileSide)+(p*(24*tileSide)),tileSide,tileSide))
-		if p == 11:
-			drawn = False
-			]]
-
 function map_draw()
 	for i=1, 12 do 
 		for v=1, 6 do 
@@ -26,10 +9,20 @@ function map_draw()
 					n = Map[y][x]
 					if n==1 then
 						love.graphics.setColor(tileColor[i][v])
-    					love.graphics.rectangle('fill', (x*tileSide)+(v*(20*tileSide)),(y*tileSide)+(i*(12*tileSide)),tileSide,tileSide)
+    					love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
+   					elseif n==4 then
+    					love.graphics.setColor(grey)
+						love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
+						love.graphics.setColor(tileColor[i][v])
+    					love.graphics.rectangle('fill', (((x-1)*tileSide)+((v-1)*(20*tileSide))),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide/2,tileSide)
+    				elseif n==5 then
+    					love.graphics.setColor(grey)
+						love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
+						love.graphics.setColor(tileColor[i][v])
+    					love.graphics.rectangle('fill', (((x-1)*tileSide)+((v-1)*(20*tileSide))+(tileSide/2)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide/2,tileSide)
 					elseif n == 0 then
 						love.graphics.setColor(grey)
-						love.graphics.rectangle('fill', (x*tileSide)+(v*(20*tileSide)),(y*tileSide)+(i*(12*tileSide)),tileSide,tileSide)
+						love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
 					end
 				end
 			end

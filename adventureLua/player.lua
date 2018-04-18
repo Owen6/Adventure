@@ -3,8 +3,8 @@ require "tiles"
 player = {
 	x = 30,
 	y = 30,
-	side = tileSide*1.5,
-	speed = 500,
+	side = tileSide*1.25,
+	speed = 300,
 }
 
 function player:move(dt)
@@ -23,6 +23,6 @@ function player:move(dt)
 end
 
 function player:draw()
-	love.graphics.setColor(151,128,158)
+	love.graphics.setColor(0,0,0)
     love.graphics.rectangle('fill', self.x, self.y, self.side, self.side)
 end
