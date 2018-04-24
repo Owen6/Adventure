@@ -4,7 +4,7 @@ player = {
 	x = 30,
 	y = 30,
 	side = tileSide*1.25,
-	speed = 300,
+	speed = 100,
 }
 
 function player:move(dt)

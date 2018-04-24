@@ -15,6 +15,8 @@ function map_draw()
 						love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
 						love.graphics.setColor(tileColor[i][v])
     					love.graphics.rectangle('fill', (((x-1)*tileSide)+((v-1)*(20*tileSide))),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide/2,tileSide)
+    					cx = ((x-1)*tileSide)+((v-1)*(20*tileSide))
+						cy = ((y-1)*tileSide)+((i-1)*(12*tileSide))
     				elseif n==5 then
     					love.graphics.setColor(grey)
 						love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
@@ -28,4 +30,4 @@ function map_draw()
 			end
 		end 
 	end
-end
+end	
