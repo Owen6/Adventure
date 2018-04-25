@@ -21,7 +21,7 @@ function love.update(dt)
 			end
 		end
 	end
-	cam:lookAt(cx*(20*4)+ (20*2),cy*(12*4)+ (12*2))
+	cam:lookAt(cx*(20*4)+ (20*2),cy*(12*4))
 	player:move(dt)
 end
 

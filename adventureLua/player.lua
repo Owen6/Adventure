@@ -3,7 +3,7 @@ require "tiles"
 player = {
 	x = 30,
 	y = 30,
-	side = tileSide*1.25,
+	side = tileSide*.75,
 	speed = 100,
 }
 
