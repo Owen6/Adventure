@@ -5,21 +5,28 @@ player = {
 	y = 30,
 	side = tileSide*.75,
 	speed = 100,
+	xvel = 0,
+	yvel = 0
 }
 
 function player:move(dt)
 	if love.keyboard.isDown('a') then
-		self.x = self.x - self.speed*dt
-	end
-	if love.keyboard.isDown('d') then
-		self.x = self.x + self.speed*dt
+		self.xvel = -self.speed
+	elseif love.keyboard.isDown('d') then
+		self.xvel = self.speed
+	else
+		self.xvel = 0
 	end
 	if love.keyboard.isDown('s') then
-		self.y = self.y + self.speed*dt
+		self.yvel = self.speed
+	elseif love.keyboard.isDown('w') then
+		self.yvel = -self.speed
+	else
+		self.yvel = 0
 	end
-	if love.keyboard.isDown('w') then
-		self.y = self.y - self.speed*dt
-	end
+
+	self.x = self.x + self.xvel * dt
+	self.y = self.y + self.yvel * dt
 end
 
 function player:draw()
