@@ -1,8 +1,8 @@
 require "tiles"
 
 player = {
-	x = 30,
-	y = 30,
+	x = 90,
+	y = 110,
 	side = tileSide*.75,
 	speed = 100,
 	xvel = 0,
@@ -25,8 +25,11 @@ function player:move(dt)
 		self.yvel = 0
 	end
 
-	self.x = self.x + self.xvel * dt
-	self.y = self.y + self.yvel * dt
+	local futureX = self.x + self.xvel * dt
+	local futureY = self.y + self.yvel * dt
+	local nextX, nextY, cols, len = world:move(self, futureX, futureY)
+	self.x = nextX
+	self.y = nextY
 end
 
 function player:draw()

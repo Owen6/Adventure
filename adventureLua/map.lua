@@ -7,7 +7,7 @@ function map_draw()
 			for y=1, #Map do
 				for x=1, #Map[y] do
 					n = Map[y][x]
-					if n==1 then
+					if n==1 or n==10 then
 						love.graphics.setColor(tileColor[i][v])
     					love.graphics.rectangle('fill', ((x-1)*tileSide)+((v-1)*(20*tileSide)),((y-1)*tileSide)+((i-1)*(12*tileSide)),tileSide,tileSide)
    					elseif n==4 or n==6  then

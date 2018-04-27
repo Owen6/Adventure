@@ -1,3 +1,5 @@
+local bump = require "bump"
+world = bump.newWorld()
 require "tiles"
 require "player"
 require "map"
@@ -6,7 +8,51 @@ local cam = camera(0,0)
 
 function love.load()
 	cam:zoomTo(6)
+	world:add(player, player.x, player.y, player.side, player.side)
 
+	for i=1, 12 do 
+		for v=1, 6 do 
+			Map = order[i][v]
+			for y=1, #Map do
+				for x=1, #Map[y] do
+					n = Map[y][x]
+					if n==1 then
+						local block = {
+							x = ((x-1)*tileSide)+((v-1)*(20*tileSide)),
+							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
+							width = tileSide,
+							height = tileSide,
+						}
+						world:add(block, block.x, block.y, block.width, block.height)
+						elseif n==2 or n==6 then
+						local block = {
+							x = ((x-1)*tileSide)+((v-1)*(20*tileSide)),
+							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
+							width = tileSide,
+							height = tileSide,
+						}
+						world:add(block, block.x, block.y, block.width, block.height)
+						elseif n==4 then
+						local block = {
+							x = ((x-1)*tileSide)+((v-1)*(20*tileSide)),
+							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
+							width = tileSide/2,
+							height = tileSide,
+						}
+						world:add(block, block.x, block.y, block.width, block.height)
+						elseif n==5 then
+						local block = {
+							x = ((x-1)*tileSide)+((v-1)*(20*tileSide))+(tileSide/2),
+							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
+							width = tileSide/2,
+							height = tileSide,
+						}
+						world:add(block, block.x, block.y, block.width, block.height)
+					end
+				end
+			end
+		end 
+	end
 end
 
 function love.update(dt)
@@ -27,8 +73,18 @@ end
 
 function love.draw()
 	cam:attach()
+
+
 	love.graphics.setBackgroundColor(235,235,235)
 	map_draw()
 	player:draw()
+
+--[[	local items, len = world:getItems()
+	for i = 1, len do
+		local item = items[i]
+		love.graphics.setColor(1, 0, 0)
+		love.graphics.rectangle("line", item.x, item.y, tileSide, tileSide)
+	end
+	]]
 	cam:detach()
 end
