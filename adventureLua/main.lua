@@ -3,8 +3,10 @@ world = bump.newWorld()
 require "tiles"
 require "player"
 require "map"
+require "key"
 camera = require "camera"
 local cam = camera(0,0)
+menu = true
 
 function love.load()
 	cam:zoomTo(6)
@@ -72,19 +74,37 @@ function love.update(dt)
 end
 
 function love.draw()
-	cam:attach()
+	if menu == false then
+		cam:attach()
 
 
-	love.graphics.setBackgroundColor(235,235,235)
-	map_draw()
-	player:draw()
+		love.graphics.setBackgroundColor(235,235,235)
+		map_draw()
+		key_draw()
+		player:draw()
 
---[[	local items, len = world:getItems()
-	for i = 1, len do
-		local item = items[i]
-		love.graphics.setColor(1, 0, 0)
-		love.graphics.rectangle("line", item.x, item.y, tileSide, tileSide)
+		--[[	local items, len = world:getItems()
+		for i = 1, len do
+			local item = items[i]
+			love.graphics.setColor(1, 0, 0)
+			love.graphics.rectangle("line", item.x, item.y, tileSide, tileSide)
+		end
+		]]
+		cam:detach()
+	else
+		menupic = love.graphics.newImage('atari.png')
+		love.graphics.draw(menupic,0,0,0,2.35,2.4)
 	end
-	]]
-	cam:detach()
+end
+
+function love.keypressed(key)
+  if key == 'space' then 
+  	menu = false
+  end
+end
+
+function love.keyreleased(key)
+  if key == 'escape' and menu then
+    love.event.quit()
+  end
 end
