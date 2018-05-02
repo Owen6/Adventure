@@ -1,11 +1,15 @@
-
+keypic = love.graphics.newImage('key.png')
+key1 = false
 key = {
 	name = "key",
-	x = 0,
-	y = 0
+	x = 110,
+	y = 110,
+	width = keypic:getWidth()*.065,
+	height = keypic:getHeight()*.065
 }
-keypic = love.graphics.newImage('key.png')
+
 
 function key_draw()
-	love.graphics.draw(keypic,90,110, 0, .065, .065)
+	love.graphics.setColor(1,1,1)
+	love.graphics.draw(keypic,key.x,key.y, 0, .065, .065)
 end

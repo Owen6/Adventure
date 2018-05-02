@@ -1,5 +1,12 @@
 require "tiles"
 
+local function collisionfilter(item,other)
+	if other.name == "key" then
+		return "cross"
+	end
+	return "slide"
+end
+
 player = {
 	x = 90,
 	y = 110,
@@ -27,7 +34,15 @@ function player:move(dt)
 
 	local futureX = self.x + self.xvel * dt
 	local futureY = self.y + self.yvel * dt
-	local nextX, nextY, cols, len = world:move(self, futureX, futureY)
+	local nextX, nextY, cols, len = world:move(self, futureX, futureY,collisionfilter)
+
+	for i=1, len do
+		local col = cols[i]
+		if col.other.name == "key" then
+			key1 = 'true'
+		end
+	end
+
 	self.x = nextX
 	self.y = nextY
 end

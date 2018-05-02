@@ -11,7 +11,7 @@ menu = true
 function love.load()
 	cam:zoomTo(6)
 	world:add(player, player.x, player.y, player.side, player.side)
-
+	world:add(key,key.x,key.y,key.width,key.height)
 	for i=1, 12 do 
 		for v=1, 6 do 
 			Map = order[i][v]
@@ -76,14 +76,14 @@ end
 function love.draw()
 	if menu == false then
 		cam:attach()
-
-
 		love.graphics.setBackgroundColor(235,235,235)
 		map_draw()
-		key_draw()
+		if key1 == false then
+			key_draw()
+		end
 		player:draw()
-
-		--[[	local items, len = world:getItems()
+--[[		
+		local items, len = world:getItems()
 		for i = 1, len do
 			local item = items[i]
 			love.graphics.setColor(1, 0, 0)
@@ -91,6 +91,11 @@ function love.draw()
 		end
 		]]
 		cam:detach()
+		if key1 == true then
+			love.graphics.setColor(0,0,0)
+			love.graphics.draw(keypic,0,0,0, 1, 1)
+		end
+		print(key1)
 	else
 		menupic = love.graphics.newImage('atari.png')
 		love.graphics.draw(menupic,0,0,0,2.35,2.4)
@@ -104,7 +109,7 @@ function love.keypressed(key)
 end
 
 function love.keyreleased(key)
-  if key == 'escape' and menu then
+  if key == 'escape' then
     love.event.quit()
   end
 end

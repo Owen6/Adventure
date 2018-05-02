@@ -33,3 +33,7 @@ function map_draw()
 		end 
 	end
 end	
+
+function key_draw()
+	for i
+end
