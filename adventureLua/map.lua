@@ -34,6 +34,6 @@ function map_draw()
 	end
 end	
 
-function key_draw()
+--[[function key_draw()
 	for i
-end
+end]]
