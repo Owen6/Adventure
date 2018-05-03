@@ -91,11 +91,12 @@ function love.draw()
 		end
 		]]
 		cam:detach()
-		if key1 == true then
+		if key1 then
 			love.graphics.setColor(0,0,0)
-			love.graphics.draw(keypic,0,0,0, 1, 1)
+			love.graphics.draw(keypic,395,540,0, 1, 1)
+			print(key1 == true)
 		end
-		print(key1)
+		print(not key1 == false, key1)
 	else
 		menupic = love.graphics.newImage('atari.png')
 		love.graphics.draw(menupic,0,0,0,2.35,2.4)
