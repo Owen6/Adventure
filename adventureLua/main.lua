@@ -12,6 +12,7 @@ function love.load()
 	cam:zoomTo(6)
 	world:add(player, player.x, player.y, player.side, player.side)
 	world:add(key,key.x,key.y,key.width,key.height)
+	world:add(castlegate1,castlegate1.x,castlegate1.y-1,castlegate1.w,1)
 	for i=1, 12 do 
 		for v=1, 6 do 
 			Map = order[i][v]
@@ -26,7 +27,7 @@ function love.load()
 							height = tileSide,
 						}
 						world:add(block, block.x, block.y, block.width, block.height)
-						elseif n==2 or n==6 then
+					elseif n==2 or n==6 then
 						local block = {
 							x = ((x-1)*tileSide)+((v-1)*(20*tileSide)),
 							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
@@ -34,7 +35,7 @@ function love.load()
 							height = tileSide,
 						}
 						world:add(block, block.x, block.y, block.width, block.height)
-						elseif n==4 then
+					elseif n==4 then
 						local block = {
 							x = ((x-1)*tileSide)+((v-1)*(20*tileSide)),
 							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
@@ -42,7 +43,7 @@ function love.load()
 							height = tileSide,
 						}
 						world:add(block, block.x, block.y, block.width, block.height)
-						elseif n==5 then
+					elseif n==5 then
 						local block = {
 							x = ((x-1)*tileSide)+((v-1)*(20*tileSide))+(tileSide/2),
 							y = ((y-1)*tileSide)+((i-1)*(12*tileSide)),
@@ -96,7 +97,7 @@ function love.draw()
 			love.graphics.draw(keypic,395,540,0, 1, 1)
 			print(key1 == true)
 		end
-		print(not key1 == false, key1)
+			print(player.x,player.y)
 	else
 		menupic = love.graphics.newImage('atari.png')
 		love.graphics.draw(menupic,0,0,0,2.35,2.4)
